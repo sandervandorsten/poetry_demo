@@ -1,0 +1,65 @@
+# Files and Excluded on which the hooks should be run.
+# files and excluded parameters that are added per hook are supplemental
+# to these globally defined files and excluded parameters
+files: "poetry_demo"
+exclude: ^.*/tests/.*$
+
+# Hooks that are run on the repo
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: trailing-whitespace
+        types:
+          [python]
+      - id: check-json
+      - id: end-of-file-fixer
+        types:
+          [python]
+  - repo: https://github.com/myint/docformatter
+    rev: v1.4
+    hooks:
+      - id: docformatter
+        args: [--in-place, --wrap-summaries=100, --wrap-description=93]
+  -   repo: https://github.com/pre-commit/mirrors-pylint
+      rev: v2.7.4
+      hooks:
+      - id: pylint
+        args:
+          [
+  #          "-rn", # Only display messages
+  #          "-sn", # Don't display the score
+            "--rcfile=~/.pylintrc"
+          ]
+        exclude: /tests/.*$
+  - repo: https://github.com/hakancelik96/unimport
+    rev: 0.9.2
+    hooks:
+      - id: unimport
+        name: unimport (Remove unused imports)
+        args:
+          [
+            --remove,
+            --include-star-import,
+            --ignore-init,
+            --gitignore
+          ]
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        name: isort (Sort all Python imports)
+        description: Sorts all imports
+        exclude: "^.*__init__.py$"
+        args:
+            [--settings-path=pyproject.toml]
+  -   repo: https://github.com/asottile/pyupgrade
+      rev: v2.29.1
+      hooks:
+      -   id: pyupgrade
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.941
+    hooks:
+      - id: mypy
+        name: mypy
+        description: static typechecker
