@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "poetry_demo"
-version = "0.1.0"
+version = "0.1.1"
 description = "Test package for using Poetry"
 authors = ["Sander van Dorsten <sandervandorsten@gmail.com>"]
 maintainers = ["Sander van Dorsten <sandervandorsten@gmail.com>"]
